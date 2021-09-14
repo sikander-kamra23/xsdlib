@@ -164,14 +164,14 @@ const generateObj = (keys, values, hasParent = true, name = '', { keysExtra, val
           let values2 = Object.values(obj.properties)
           let keysExtra = Object.keys(obj)
           let valuesExtra = Object.values(obj)
-          xml += `<xs:element maxOccurs="unbounded" name="${keys[key]}">`
+          xml += `<xs:element maxOccurs="unbounded" name="${keys[key]}" minOccurs="0">`
           xml += generateObj(keys2, values2, false, null, {
             keysExtra,
             valuesExtra,
           }).xml
           xml += `</xs:element>`
         } else {
-          xml += `<xs:element maxOccurs="unbounded" type="xs:${obj.type}" name="${keys[key]}" />`
+          xml += `<xs:element maxOccurs="unbounded" type="xs:${obj.type}" name="${keys[key]}" minOccurs="0"/>`
         }
       } else if (typeof type === 'string' && type.length > 0) {
         let keysExtra = Object.keys(values[key])
