@@ -187,7 +187,7 @@ const generateObj = (keys, values, hasParent = true, name = '', { keysExtra, val
           xml += generateComplexTypes(keysExtra, valuesExtra, keys[key], type)
         } else {
           if (keys[key] !== 'extension') {
-            xml += `<xs:element ${defaultInline} type="xs:${type}" name="${keys[key]}"/>`
+            xml += `<xs:element ${defaultInline} type="xs:${type}" name="${keys[key]}" minOccurs="0"/>`
           } else {
             if (attributes.length > 0) {
               xml += `<xs:extension base="xs:${type}">`
@@ -214,7 +214,7 @@ const generateObj = (keys, values, hasParent = true, name = '', { keysExtra, val
     let keysExtra = keys
     let valuesExtra = values
     if (type === 'string' && keys.length === 1) {
-      xml += `<xs:element ${defaultInline} type="xs:${type}" name="${name}_item"/>`
+      xml += `<xs:element ${defaultInline} type="xs:${type}" name="${name}_item" minOccurs="0"/>`
     } else if (type === 'string' && keys.length > 1) {
       xmlExtraTypes += generateExtraTypes(keysExtra, valuesExtra, name)
       xml += generateComplexTypes(keysExtra, valuesExtra, name, type)
