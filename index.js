@@ -67,7 +67,7 @@ const generateComplexTypes = (keysExtra, valuesExtra, key, type) => {
   if (keysExtra.length === 2 && keysExtra.indexOf('isArray') !== -1) {
     xml += `<${key}>${defaultAttr}</${key}>`
   } else {
-    xml += `<xs:element ${isArray} type="xs:${type}" ${defaultAttr} name="${key}"><xs:complexType><xs:simpleContent><xs:extension ${baseAttr}>`
+    xml += `<xs:element ${isArray} type="xs:${type}" ${defaultAttr} name="${key}" minOccurs="0"><xs:complexType><xs:simpleContent><xs:extension ${baseAttr}>`
     keysExtra2.forEach((d, index) => {
       xml += `<xs:attribute default="${valuesExtra2[index]}" name="${d.replace('attribute_', '')}" type="xs:string"/>`
     })
@@ -151,7 +151,7 @@ const generateObj = (keys, values, hasParent = true, name = '', { keysExtra, val
         let values2 = Object.values(obj.properties)
         let keysExtra = Object.keys(obj)
         let valuesExtra = Object.values(obj)
-        xml += `<xs:element name="${keys[key]}">`
+        xml += `<xs:element name="${keys[key]}" minOccurs="0">`
         xml += generateObj(keys2, values2, false, null, {
           keysExtra,
           valuesExtra,
